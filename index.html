@@ -5,8 +5,7 @@
   <title>
    Foto-Foto mu masih ku simpan cantik hehe &amp; Imut
   </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&amp;display=swap" rel="stylesheet"/>
   <style>
@@ -86,8 +85,7 @@
     <span class="text-pink-600" id="photo-count">
      12
     </span>
-    <i class="fas fa-heart text-pink-600 ml-2 animate-ping">
-    </i>
+    <i class="fas fa-heart text-pink-600 ml-2 animate-ping"></i>
    </p>
   </header>
   <main class="w-full max-w-5xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -131,14 +129,32 @@
   <footer class="mt-12 text-center text-pink-400 font-semibold select-none">
    <p>
     Dibuat oleh
-    <i class="fas fa-heart text-pink-600 animate-pulse">
-    </i>
+    <i class="fas fa-heart text-pink-600 animate-pulse"></i>
     arta ganteng 
    </p>
   </footer>
-  <audio autoplay="" id="romantic-music" loop="">
-   <source src="https://htmlku.com/youready/youready.mp3"
+  <audio id="romantic-music" loop>
+   <source src="https://htmlku.com/youready/youready.mp3" type="audio/mpeg"/>
    Your browser does not support the audio element.
   </audio>
+  <script>
+    // Attempt to play audio on page load, handle autoplay restrictions
+    window.addEventListener('load', () => {
+      const audio = document.getElementById('romantic-music');
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay was prevented, show a user interaction hint or play on first click
+          const playOnInteraction = () => {
+            audio.play();
+            window.removeEventListener('click', playOnInteraction);
+            window.removeEventListener('touchstart', playOnInteraction);
+          };
+          window.addEventListener('click', playOnInteraction);
+          window.addEventListener('touchstart', playOnInteraction);
+        });
+      }
+    });
+  </script>
  </body>
 </html>
